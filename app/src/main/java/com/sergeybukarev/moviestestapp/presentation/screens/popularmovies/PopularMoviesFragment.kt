@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import autodispose2.ScopeProvider
 import autodispose2.androidx.lifecycle.autoDispose
 import com.jakewharton.rxbinding4.view.visibility
+import com.sergeybukarev.moviestestapp.R
 import com.sergeybukarev.moviestestapp.core.platform.BaseFragment
 import com.sergeybukarev.moviestestapp.databinding.FragmentMoviePopularsBinding
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -26,7 +27,7 @@ class PopularMoviesFragment : BaseFragment<FragmentMoviePopularsBinding>() {
         super.onViewCreated(views, savedInstanceState, whenViewDestroyed)
         adapter.onItemClick = { delegate.popularMoviesItemTap(it) }
         val layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
-        val spaceItemDecoration = SpacesItemDecoration(20)
+        val spaceItemDecoration = SpacesItemDecoration(resources.getDimensionPixelOffset(R.dimen.videos_item_space))
         views.listView.layoutManager = layoutManager
         views.listView.addItemDecoration(spaceItemDecoration)
         views.listView.addOnScrollListener(ShortScrollListener(layoutManager) { model.prefetchIfNeeded(it) })
