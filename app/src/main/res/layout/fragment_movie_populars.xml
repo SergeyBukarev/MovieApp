@@ -18,7 +18,7 @@
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="Top Movies" />
+            app:title="@string/screen_popular_movies_title" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
