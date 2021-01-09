@@ -5,10 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.NavHostFragment
 import com.sergeybukarev.moviestestapp.R
-import com.sergeybukarev.moviestestapp.core.toothpick.modules.ActivityModule
-import com.sergeybukarev.moviestestapp.core.toothpick.modules.ApiModule
-import com.sergeybukarev.moviestestapp.core.toothpick.modules.NavControllerModule
-import com.sergeybukarev.moviestestapp.core.toothpick.modules.RootNavigationModule
+import com.sergeybukarev.moviestestapp.core.toothpick.modules.*
 import com.sergeybukarev.moviestestapp.core.toothpick.providers.NavControllerHolder
 import com.sergeybukarev.moviestestapp.core.toothpick.qualifiers.RootNavigation
 import com.sergeybukarev.moviestestapp.core.toothpick.scopes.RootScope
@@ -56,7 +53,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             NavControllerModule(RootNavigation::class),
             RootNavigationModule(it),
             ApiModule(),
-            // TODO add other modules
+            MovieModule(),
         )
     }
 

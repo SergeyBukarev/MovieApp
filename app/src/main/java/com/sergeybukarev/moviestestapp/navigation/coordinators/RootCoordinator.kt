@@ -9,6 +9,7 @@ import com.sergeybukarev.moviestestapp.core.toothpick.qualifiers.ActivityLogical
 import com.sergeybukarev.moviestestapp.core.toothpick.qualifiers.RootNavigation
 import com.sergeybukarev.moviestestapp.core.toothpick.scopes.RootScope
 import com.sergeybukarev.moviestestapp.navigation.coordinators.base.BaseCoordinator
+import com.sergeybukarev.moviestestapp.presentation.screens.popularmovies.PopularMoviesFragment
 import org.deejdev.scopelib.useScope
 import toothpick.InjectConstructor
 import javax.inject.Provider
@@ -18,11 +19,16 @@ class RootCoordinator(
     @ActivityLogicalLifecycle lifecycle: Lifecycle,
     @RootNavigation private val navController: Provider<NavController>,
 ) : MainActivity.Delegate,
+    PopularMoviesFragment.Delegate,
     BaseCoordinator(lifecycle) {
 
     // region Initialization
     override fun navControllerCreated() {
         navController.setGraphWhenCreated(R.navigation.root, Bundle().useScope<RootScope>())
+    }
+
+    override fun popularMoviesItemTap(movieId: Int) {
+
     }
     // endregion
 }

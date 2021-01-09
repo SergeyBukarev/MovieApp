@@ -14,8 +14,8 @@ interface MovieApiService {
     fun getPopularMovies(@Query("page") page: Int): Single<PopularMoviesResponse>
 
     @GET("/3/movie/{movie}/credits")
-    fun getMovieCredits(@Path("movie") movie: String): Single<MovieCreditsResponse>
+    fun getMovieCredits(@Path("movie") movieId: Int): Single<MovieCreditsResponse>
 
     @GET("/3/movie/{movie}")
-    fun getMovieDetails(@Path("movie") movie: String): Single<MovieDetailsResponse>
+    fun getMovieDetails(@Path("movie") movieId: Int): Single<MovieDetailsResponse>
 }

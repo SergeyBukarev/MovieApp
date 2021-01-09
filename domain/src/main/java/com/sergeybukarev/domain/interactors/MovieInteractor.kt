@@ -5,7 +5,9 @@ import com.sergeybukarev.domain.dto.DetailedMovie
 import com.sergeybukarev.domain.dto.ShortMovie
 import com.sergeybukarev.domain.gateways.MovieGateway
 import io.reactivex.rxjava3.core.Single
+import toothpick.InjectConstructor
 
+@InjectConstructor
 class MovieInteractor(
     private val movieGateway: MovieGateway,
 ) {
