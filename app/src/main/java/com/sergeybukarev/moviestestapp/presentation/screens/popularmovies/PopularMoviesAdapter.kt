@@ -44,7 +44,7 @@ class PopularMoviesAdapter(
             views.dateView.text = dateMapper.mapDate(item.releaseDate)
             views.markView.text = item.ratingPercentage.toString()
             views.markProgressView.progress = item.ratingPercentage
-            val hue = (360 - views.markProgressView.angle) / 3
+            val hue = views.markProgressView.angle / 3
             views.markProgressView.color = Color.HSVToColor(floatArrayOf(hue, 1F, 1F))
             views.root.setOnClickListener { onItemClick(item.id) }
         }

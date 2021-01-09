@@ -52,7 +52,7 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>() {
         Glide.with(requireViews().cardImageView).load(item.posterImage).centerCrop().placeholder(R.drawable.image_placeholder).into(requireViews().cardImageView)
         requireViews().markProgressView.progress = item.ratingPercentage
         requireViews().markView.text = item.ratingPercentage.toString()
-        val hue = (360 - requireViews().markProgressView.angle) / 3
+        val hue = requireViews().markProgressView.angle / 3
         requireViews().markProgressView.color = Color.HSVToColor(floatArrayOf(hue, 1F, 1F))
         requireViews().overviewView.text = item.overview
     }
