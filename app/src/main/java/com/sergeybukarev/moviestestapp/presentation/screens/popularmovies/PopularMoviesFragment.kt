@@ -46,7 +46,6 @@ class PopularMoviesFragment : BaseFragment<FragmentMoviePopularsBinding>() {
 
 class ShortScrollListener(private val layoutManager: LinearLayoutManager, private val lastVisibleItemListener: (Int) -> Unit) : RecyclerView.OnScrollListener() {
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-        super.onScrolled(recyclerView, dx, dy)
         val lastVisible = layoutManager.findLastVisibleItemPosition()
         lastVisibleItemListener.invoke(lastVisible)
     }

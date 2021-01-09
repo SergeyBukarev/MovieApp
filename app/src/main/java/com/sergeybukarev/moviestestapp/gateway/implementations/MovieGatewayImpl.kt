@@ -3,7 +3,7 @@ package com.sergeybukarev.moviestestapp.gateway.implementations
 import com.sergeybukarev.apiclient.services.MovieApiService
 import com.sergeybukarev.domain.dto.Cast
 import com.sergeybukarev.domain.dto.DetailedMovie
-import com.sergeybukarev.domain.dto.ShortMovie
+import com.sergeybukarev.domain.dto.ShortMoviePage
 import com.sergeybukarev.domain.gateways.MovieGateway
 import com.sergeybukarev.moviestestapp.gateway.mappers.CastMapper
 import com.sergeybukarev.moviestestapp.gateway.mappers.MovieMapper
@@ -17,11 +17,11 @@ class MovieGatewayImpl(
     private val castMapper: CastMapper,
 ) : MovieGateway {
 
-    override fun getPopularMovie(page: Int): Single<List<ShortMovie>> {
-        return movieApiService.getPopularMovies(page).map { it.results.map(movieMapper::mapPopular) }
+    override fun getPopularMovies(page: Int): Single<ShortMoviePage> {
+        return movieApiService.getPopularMovies(page).map { ShortMoviePage(it.page, it.results.map(movieMapper::mapPopular), it.total_pages, it.total_results) }
     }
 
-    override fun getDetailMovie(movieId: Int): Single<DetailedMovie> {
+    override fun getMovieDetails(movieId: Int): Single<DetailedMovie> {
         return movieApiService.getMovieDetails(movieId).map(movieMapper::mapDetail)
     }
 

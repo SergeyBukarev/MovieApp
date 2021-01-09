@@ -50,7 +50,7 @@ class PopularMoviesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
 
         private fun mapDate(input: String?): String? {
-            return if (input != null) {
+            return if (input != null && input.isNotBlank()) {
                 val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 val date = inputFormat.parse(input)
                 val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())

@@ -2,6 +2,7 @@ package com.sergeybukarev.moviestestapp.presentation.screens.popularmovies
 
 import com.jakewharton.rxrelay3.BehaviorRelay
 import com.sergeybukarev.domain.dto.ShortMovie
+import com.sergeybukarev.domain.dto.ShortMoviePage
 import com.sergeybukarev.domain.interactors.MovieInteractor
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -13,35 +14,35 @@ import toothpick.InjectConstructor
 class PopularMoviesViewModel(movieInteractor: MovieInteractor) {
     private val initialPage: Int = 1
     private val fetchThreshold: Int = 5
-    private var currentPage: Int = initialPage
-    private var lastFetchItemIndex: Int? = null
 
     private val _items: BehaviorRelay<List<ShortMovie>> = BehaviorRelay.createDefault(emptyList())
     val items: Observable<List<ShortMovie>> get() = _items.observeOn(AndroidSchedulers.mainThread())
 
+    private var currentPage: BehaviorRelay<Int> = BehaviorRelay.createDefault(initialPage)
+    private var maxPages: BehaviorRelay<Int> = BehaviorRelay.createDefault(initialPage)
     private val _hasMoreToLoad: BehaviorRelay<Boolean> = BehaviorRelay.createDefault(true)
     private val hasMoreToLoad: Observable<Boolean> = _hasMoreToLoad
 
     fun prefetchIfNeeded(currentItemIndex: Int) {
-        if (lastFetchItemIndex == null || (lastFetchItemIndex != null && currentItemIndex > lastFetchItemIndex!!)) {
-            if ((currentItemIndex + fetchThreshold) > _items.value.size - 1) {
-                lastFetchItemIndex = currentItemIndex
+        if ((currentItemIndex + fetchThreshold) > _items.value.lastIndex) {
+            if (currentPage.value <= maxPages.value) {
                 loadMoreAction()
             }
         }
     }
 
-    val loadMoreAction: Action<Unit, Nothing> = Action.fromCompletable(isUserEnabled = hasMoreToLoad) {
-        movieInteractor.getPopularMovie(currentPage)
+    val loadMoreAction: Action<Unit, Nothing> = Action.fromCompletable(AndroidSchedulers.mainThread(), isUserEnabled = hasMoreToLoad) {
+        movieInteractor.getPopularMovies(currentPage.value)
             .doOnSuccess(::handleNewItems)
             .ignoreElement()
     }
 
-    private fun handleNewItems(items: List<ShortMovie>) {
-        if (items.isNotEmpty()) {
+    private fun handleNewItems(page: ShortMoviePage) {
+        if (page.movies.isNotEmpty()) {
             _hasMoreToLoad.accept(true)
-            _items.accept(_items.value!! + items)
-            currentPage += 1
+            _items.accept(_items.value!! + page.movies)
+            maxPages.accept(page.totalPages)
+            currentPage.accept(currentPage.value + 1)
         } else {
             _hasMoreToLoad.accept(false)
         }
