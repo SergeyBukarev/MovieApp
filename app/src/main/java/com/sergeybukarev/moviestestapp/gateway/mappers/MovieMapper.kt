@@ -17,7 +17,7 @@ class MovieMapper {
             from.title,
             from.original_title,
             from.overview,
-            mapUri(from.poster_path)!!,
+            mapUri(from.poster_path),
             from.release_date,
             from.runtime,
             from.status,
@@ -48,7 +48,7 @@ class MovieMapper {
         )
     }
 
-    private fun mapUri(url: String): Uri {
+    private fun mapUri(url: String): Uri? {
         val baseUrl = "https://image.tmdb.org/t/p/original/"
         return Uri.parse(baseUrl.plus(url))
     }
