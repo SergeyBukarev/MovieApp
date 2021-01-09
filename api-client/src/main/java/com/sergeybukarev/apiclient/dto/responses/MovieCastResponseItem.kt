@@ -7,7 +7,7 @@ data class MovieCastResponseItem(
     val id: Int,
     val name: String,
     val original_name: String,
-    val profile_path: String,
+    val profile_path: String?,
     val character: String,
     val order: Int,
 )

@@ -8,7 +8,7 @@ data class DetailedMovie(
     val originalTitle: String,
     val overview: String,
     val posterImage: Uri?,
-    val releaseDate: String,
+    val releaseDate: String?,
     val runtime: Int,
     val status: String,
     val popularity: Double,

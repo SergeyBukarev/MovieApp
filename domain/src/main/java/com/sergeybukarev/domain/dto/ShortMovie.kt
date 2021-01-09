@@ -11,5 +11,5 @@ data class ShortMovie(
     val posterImage: Uri?,
     val popularity: Double,
     val voteAverage: Double,
-    val releaseDate: String,
+    val releaseDate: String?,
 )
