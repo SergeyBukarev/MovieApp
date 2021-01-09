@@ -48,8 +48,12 @@ class MovieMapper {
         )
     }
 
-    private fun mapUri(url: String): Uri? {
-        val baseUrl = "https://image.tmdb.org/t/p/original/"
-        return Uri.parse(baseUrl.plus(url))
+    private fun mapUri(url: String?): Uri? {
+        return if (url == null) {
+            null
+        } else {
+            val baseUrl = "https://image.tmdb.org/t/p/original/"
+            Uri.parse(baseUrl.plus(url))
+        }
     }
 }
