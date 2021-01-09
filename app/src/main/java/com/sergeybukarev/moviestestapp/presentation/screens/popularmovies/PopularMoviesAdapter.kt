@@ -8,13 +8,13 @@ import com.bumptech.glide.Glide
 import com.sergeybukarev.domain.dto.ShortMovie
 import com.sergeybukarev.moviestestapp.R
 import com.sergeybukarev.moviestestapp.databinding.ItemMovieBinding
+import com.sergeybukarev.moviestestapp.gateway.mappers.DateMapper
 import toothpick.InjectConstructor
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
 
 @InjectConstructor
-class PopularMoviesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PopularMoviesAdapter(
+    private val dateMapper: DateMapper,
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var items = ArrayList<ShortMovie>()
     lateinit var onItemClick: (Int) -> Unit
 
@@ -34,34 +34,19 @@ class PopularMoviesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
         val itemHolder = holder as ViewHolder
-        itemHolder.bind(item, onItemClick)
+        itemHolder.bind(item, dateMapper, onItemClick)
     }
 
     class ViewHolder(val views: ItemMovieBinding) : RecyclerView.ViewHolder(views.root) {
-        fun bind(item: ShortMovie, onItemClick: (Int) -> Unit) {
+        fun bind(item: ShortMovie, dateMapper: DateMapper, onItemClick: (Int) -> Unit) {
             Glide.with(views.imageView).load(item.backdropImage).centerCrop().placeholder(R.drawable.image_placeholder).into(views.imageView)
             views.titleView.text = item.originalTitle
-            views.dateView.text = mapDate(item.releaseDate)
+            views.dateView.text = dateMapper.mapDate(item.releaseDate)
             views.markView.text = item.ratingPercentage.toString()
             views.markProgressView.progress = item.ratingPercentage
             val hue = (360 - views.markProgressView.angle) / 3
             views.markProgressView.color = Color.HSVToColor(floatArrayOf(hue, 1F, 1F))
             views.root.setOnClickListener { onItemClick(item.id) }
-        }
-
-        private fun mapDate(input: String?): String? {
-            return if (input != null && input.isNotBlank()) {
-                val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val date = inputFormat.parse(input)
-                val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
-                if (date != null) {
-                    outputFormat.format(date)
-                } else {
-                    null
-                }
-            } else {
-                null
-            }
         }
     }
 }

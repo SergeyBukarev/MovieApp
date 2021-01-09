@@ -10,4 +10,9 @@
         android:name="com.sergeybukarev.moviestestapp.presentation.screens.popularmovies.PopularMoviesFragment"
         tools:layout="@layout/fragment_movie_populars" />
 
+    <fragment
+        android:id="@+id/movieDetails_fragment"
+        android:name="com.sergeybukarev.moviestestapp.presentation.screens.moviedetails.MovieDetailsFragment"
+        tools:layout="@layout/fragment_movie_details" />
+
 </navigation>

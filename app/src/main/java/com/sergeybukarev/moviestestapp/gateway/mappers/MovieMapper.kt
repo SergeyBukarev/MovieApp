@@ -8,6 +8,8 @@ import com.sergeybukarev.domain.dto.DetailedMovie
 import com.sergeybukarev.domain.dto.Genre
 import com.sergeybukarev.domain.dto.ShortMovie
 import toothpick.InjectConstructor
+import java.text.SimpleDateFormat
+import java.util.*
 
 @InjectConstructor
 class MovieMapper {
@@ -18,6 +20,7 @@ class MovieMapper {
             from.original_title,
             from.overview,
             mapUri(from.poster_path),
+            mapUri(from.backdrop_path),
             from.release_date,
             from.runtime,
             from.status,
@@ -54,6 +57,21 @@ class MovieMapper {
         } else {
             val baseUrl = "https://image.tmdb.org/t/p/original/"
             Uri.parse(baseUrl.plus(url))
+        }
+    }
+
+    fun mapDate(input: String?): String? {
+        return if (input != null && input.isNotBlank()) {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            val date = inputFormat.parse(input)
+            val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+            if (date != null) {
+                outputFormat.format(date)
+            } else {
+                null
+            }
+        } else {
+            null
         }
     }
 }

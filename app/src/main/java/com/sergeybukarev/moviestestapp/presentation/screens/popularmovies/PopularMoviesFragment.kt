@@ -19,9 +19,9 @@ class PopularMoviesFragment : BaseFragment<FragmentMoviePopularsBinding>() {
         fun popularMoviesItemTap(movieId: Int)
     }
 
-    val delegate by inject<Delegate>()
-    val adapter by inject<PopularMoviesAdapter>()
-    val model by inject<PopularMoviesViewModel>()
+    private val delegate by inject<Delegate>()
+    private val adapter by inject<PopularMoviesAdapter>()
+    private val model by inject<PopularMoviesViewModel>()
 
     override fun onViewCreated(views: FragmentMoviePopularsBinding, savedInstanceState: Bundle?, whenViewDestroyed: ScopeProvider) {
         super.onViewCreated(views, savedInstanceState, whenViewDestroyed)

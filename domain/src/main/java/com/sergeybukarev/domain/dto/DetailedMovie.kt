@@ -8,10 +8,17 @@ data class DetailedMovie(
     val originalTitle: String,
     val overview: String,
     val posterImage: Uri?,
+    val backdropImage: Uri?,
     val releaseDate: String?,
     val runtime: Int,
     val status: String,
     val popularity: Double,
     val voteAverage: Double,
     val genres: List<Genre>,
-)
+) {
+    val ratingPercentage: Int
+        get() {
+            return (voteAverage * 10).toInt().coerceIn(0, 100)
+        }
+}
+
