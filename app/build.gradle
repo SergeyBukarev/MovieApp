@@ -63,7 +63,7 @@ dependencies {
     // DI
     kapt "com.github.stephanenicolas.toothpick:toothpick-compiler:$toothpick_version"
     implementation "com.github.stephanenicolas.toothpick:smoothie-androidx:$toothpick_version"
-    implementation 'com.github.ultimate-deej:scopelib:0.3'
+    implementation 'com.github.ultimate-deej:scopelib:0.4'
 
     // RxJava
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
