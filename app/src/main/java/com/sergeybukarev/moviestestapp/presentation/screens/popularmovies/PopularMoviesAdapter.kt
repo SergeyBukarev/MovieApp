@@ -8,6 +8,9 @@ import com.sergeybukarev.domain.dto.ShortMovie
 import com.sergeybukarev.moviestestapp.R
 import com.sergeybukarev.moviestestapp.databinding.ItemMovieBinding
 import toothpick.InjectConstructor
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 @InjectConstructor
 class PopularMoviesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -37,8 +40,23 @@ class PopularMoviesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(item: ShortMovie, onItemClick: (Int) -> Unit) {
             Glide.with(views.imageView).load(item.backdropImage).centerCrop().placeholder(R.drawable.image_placeholder).into(views.imageView)
             views.titleView.text = item.originalTitle
-            views.dateView.text = item.releaseDate
+            views.dateView.text = mapDate(item.releaseDate)
             views.root.setOnClickListener { onItemClick(item.id) }
+        }
+
+        private fun mapDate(input: String?): String? {
+            return if (input != null) {
+                val inputFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val date = inputFormat.parse(input)
+                val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
+                if (date != null) {
+                    outputFormat.format(date)
+                } else {
+                    null
+                }
+            } else {
+                null
+            }
         }
     }
 }
