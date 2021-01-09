@@ -1,3 +1,4 @@
+include ':domain'
 include ':common'
 include ':api-client'
 include ':app'
