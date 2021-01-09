@@ -12,4 +12,9 @@ data class ShortMovie(
     val popularity: Double,
     val voteAverage: Double,
     val releaseDate: String?,
-)
+) {
+    val ratingPercentage: Int
+        get() {
+            return (voteAverage * 10).toInt().coerceIn(0, 100)
+        }
+}

@@ -1,5 +1,6 @@
 package com.sergeybukarev.moviestestapp.presentation.screens.popularmovies
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -41,6 +42,10 @@ class PopularMoviesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             Glide.with(views.imageView).load(item.backdropImage).centerCrop().placeholder(R.drawable.image_placeholder).into(views.imageView)
             views.titleView.text = item.originalTitle
             views.dateView.text = mapDate(item.releaseDate)
+            views.markView.text = item.ratingPercentage.toString()
+            views.markProgressView.progress = item.ratingPercentage
+            val hue = (360 - views.markProgressView.angle) / 3
+            views.markProgressView.color = Color.HSVToColor(floatArrayOf(hue, 1F, 1F))
             views.root.setOnClickListener { onItemClick(item.id) }
         }
 

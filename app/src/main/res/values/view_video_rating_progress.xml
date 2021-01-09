@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="strokeWidth" format="dimension" />
+
+    <declare-styleable name="MarkProgressView">
+        <attr name="strokeWidth" />
+        <attr name="maxProgress" format="integer" />
+        <attr name="android:color" />
+    </declare-styleable>
+</resources>

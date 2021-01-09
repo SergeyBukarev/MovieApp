@@ -43,4 +43,43 @@
         app:layout_constraintTop_toBottomOf="@id/title_view"
         tools:text="18 Dec 2019" />
 
+    <View
+        android:id="@+id/progress_back_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/mark_progress_background"
+        android:color="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/image_view"
+        app:layout_constraintStart_toStartOf="@id/image_view"
+        app:layout_constraintTop_toBottomOf="@id/image_view" />
+
+    <com.sergeybukarev.moviestestapp.presentation.views.MarkProgressView
+        android:id="@+id/mark_progress_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="3dp"
+        android:color="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/progress_back_view"
+        app:layout_constraintEnd_toEndOf="@id/progress_back_view"
+        app:layout_constraintStart_toStartOf="@id/progress_back_view"
+        app:layout_constraintTop_toTopOf="@id/progress_back_view"
+        app:maxProgress="100"
+        app:strokeWidth="3dp" />
+
+    <TextView
+        android:id="@+id/mark_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:maxLength="2"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/mark_progress_view"
+        app:layout_constraintEnd_toEndOf="@id/mark_progress_view"
+        app:layout_constraintStart_toStartOf="@id/mark_progress_view"
+        app:layout_constraintTop_toTopOf="@id/mark_progress_view"
+        tools:text="3333" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
