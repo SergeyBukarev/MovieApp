@@ -41,22 +41,16 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
         views = null
     }
 
-    final override fun onViewCreated(view: View, savedInstanceState: Bundle?) = super.onViewCreated(view, savedInstanceState)
-
-    final override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-
-        onViewCreated(requireViews(), savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val whenViewDestroyed = viewLifecycleOwner.scope(Lifecycle.Event.ON_DESTROY)
-        // This is replacement for standart onViewCreated method but instead of root view passed all (ViewBinding)
-        // and ScopeProvider (for AutoDispose). Other methods serve for binding to view model.
-        // Called here in onViewStateRestored method for consistency with `lifecycle`
         onViewCreated(requireViews(), savedInstanceState, whenViewDestroyed)
         onApplyInitialModelValues(requireViews(), whenViewDestroyed)
         onBindToModel(requireViews(), whenViewDestroyed)
         onViewBound(requireViews())
     }
+
 
     @Deprecated("Use 3-parameters version instead")
     protected open fun onViewCreated(views: Binding, savedInstanceState: Bundle?) = Unit
