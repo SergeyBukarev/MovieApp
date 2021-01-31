@@ -3,4 +3,5 @@
     <string name="screen_movie_details_score_label">User Score</string>
     <string name="screen_movie_details_overview_label">Overview</string>
     <string name="screen_movie_details_cast_label">Top Billed Cast</string>
+    <string name="screen_movie_details_details_label">Released: %1$s</string>
 </resources>

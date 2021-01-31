@@ -39,17 +39,21 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>() {
     }
 
     private fun initViews(item: DetailedMovie) {
-        Glide.with(requireViews().backImageView).load(item.backdropImage).centerCrop().placeholder(R.drawable.image_placeholder).into(requireViews().backImageView)
         requireViews().titleView.text = item.title
 
-        requireViews().summaryView.text = "Released: ${dateMapper.mapDate(item.releaseDate)}\n${dateMapper.mapDuration(item.runtime)}\n${item.genres.joinToString { it.name }}"
+        val details = "${dateMapper.mapDate(item.releaseDate)}\n${dateMapper.mapDuration(item.runtime)}\n${item.genres.joinToString { it.name }}"
+        requireViews().summaryView.text = getString(R.string.screen_movie_details_details_label, details)
 
-        Glide.with(requireViews().cardImageView).load(item.posterImage).centerCrop().placeholder(R.drawable.image_placeholder).into(requireViews().cardImageView)
         requireViews().markProgressView.progress = item.ratingPercentage
         requireViews().markView.text = item.ratingPercentage.toString()
         val hue = requireViews().markProgressView.angle / 3
         requireViews().markProgressView.color = Color.HSVToColor(floatArrayOf(hue, 1F, 1F))
         requireViews().overviewView.text = item.overview
+
+        requireView().post {
+            Glide.with(requireViews().cardImageView).load(item.posterImage).centerCrop().placeholder(R.drawable.image_placeholder).into(requireViews().cardImageView)
+            Glide.with(requireViews().backImageView).load(item.backdropImage).centerCrop().placeholder(R.drawable.image_placeholder).into(requireViews().backImageView)
+        }
     }
 
     override fun onViewBound(views: FragmentMovieDetailsBinding) {
