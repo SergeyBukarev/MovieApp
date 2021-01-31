@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         it.installModules(
             SmoothieApplicationModule(application),
             ActivityModule(logicalLifecycle),
+            MovieModule(),
             NavControllerModule(RootNavigation::class),
             RootNavigationModule(it),
             ApiModule(),

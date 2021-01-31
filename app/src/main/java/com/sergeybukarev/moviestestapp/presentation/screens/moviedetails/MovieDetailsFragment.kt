@@ -28,11 +28,6 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>() {
         views.castListView.adapter = adapter
     }
 
-    override fun onApplyInitialModelValues(views: FragmentMovieDetailsBinding, whenViewDestroyed: ScopeProvider) {
-        super.onApplyInitialModelValues(views, whenViewDestroyed)
-        model.movieId.accept(requireArguments().getInt(ARGUMENTS_MOVIE_ID))
-    }
-
     override fun onBindToModel(views: FragmentMovieDetailsBinding, whenViewDestroyed: ScopeProvider) {
         model.castItems.observeOn(AndroidSchedulers.mainThread()).autoDispose(this).subscribe { adapter.addItems(it) }
         model.loadCastAction.isExecuting.observeOn(AndroidSchedulers.mainThread()).autoDispose(this).subscribe(views.castsActivityIndicatorView.visibility())
@@ -60,9 +55,5 @@ class MovieDetailsFragment : BaseFragment<FragmentMovieDetailsBinding>() {
     override fun onViewBound(views: FragmentMovieDetailsBinding) {
         model.loadCastAction()
         model.loadDetailsAction()
-    }
-
-    companion object {
-        const val ARGUMENTS_MOVIE_ID = "MOVIE_ID"
     }
 }

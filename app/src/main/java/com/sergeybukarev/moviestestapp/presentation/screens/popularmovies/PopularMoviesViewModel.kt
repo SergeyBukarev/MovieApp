@@ -3,7 +3,7 @@ package com.sergeybukarev.moviestestapp.presentation.screens.popularmovies
 import com.jakewharton.rxrelay3.BehaviorRelay
 import com.sergeybukarev.domain.dto.ShortMovie
 import com.sergeybukarev.domain.dto.ShortMoviePage
-import com.sergeybukarev.domain.interactors.MovieInteractor
+import com.sergeybukarev.domain.interactors.FetchMovieInteractor
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import org.deejdev.rxaction3.Action
@@ -11,7 +11,7 @@ import org.deejdev.rxaction3.invoke
 import toothpick.InjectConstructor
 
 @InjectConstructor
-class PopularMoviesViewModel(movieInteractor: MovieInteractor) {
+class PopularMoviesViewModel(fetchMovieInteractor: FetchMovieInteractor) {
     private val initialPage: Int = 1
     private val fetchThreshold: Int = 5
 
@@ -32,7 +32,7 @@ class PopularMoviesViewModel(movieInteractor: MovieInteractor) {
     }
 
     val loadMoreAction: Action<Unit, Nothing> = Action.fromCompletable(AndroidSchedulers.mainThread(), isUserEnabled = hasMoreToLoad) {
-        movieInteractor.getPopularMovies(currentPage.value)
+        fetchMovieInteractor.fetchMovies(currentPage.value)
             .doOnSuccess(::handleNewItems)
             .ignoreElement()
     }

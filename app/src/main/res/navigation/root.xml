@@ -8,7 +8,11 @@
     <fragment
         android:id="@+id/topMovies_fragment"
         android:name="com.sergeybukarev.moviestestapp.presentation.screens.popularmovies.PopularMoviesFragment"
-        tools:layout="@layout/fragment_movie_populars" />
+        tools:layout="@layout/fragment_movie_populars" >
+        <action
+            android:id="@+id/action_to_movieDetails"
+            app:destination="@id/movieDetails_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/movieDetails_fragment"
