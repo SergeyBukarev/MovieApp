@@ -16,7 +16,6 @@ import autodispose2.ScopeProvider
 import autodispose2.androidx.lifecycle.scope
 import autodispose2.autoDispose
 import com.sergeybukarev.moviestestapp.R
-import com.sergeybukarev.moviestestapp.presentation.helpers.args
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import org.deejdev.rxaction3.Action
 import org.deejdev.rxaction3.invoke
@@ -26,9 +25,6 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
     protected var views: Binding? = null
     protected fun requireViews(): Binding = views!!
-
-    protected var isColdStart: Boolean by args.boolean(true)
-        private set
 
     protected open val isDarkStatusBar: Boolean = false
 
@@ -60,8 +56,6 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
         onApplyInitialModelValues(requireViews(), whenViewDestroyed)
         onBindToModel(requireViews(), whenViewDestroyed)
         onViewBound(requireViews())
-
-        isColdStart = false
     }
 
     @Deprecated("Use 3-parameters version instead")
