@@ -49,9 +49,9 @@ abstract class BaseFragment<Binding : ViewBinding> : Fragment() {
         onViewCreated(requireViews(), savedInstanceState)
 
         val whenViewDestroyed = viewLifecycleOwner.scope(Lifecycle.Event.ON_DESTROY)
-        // Замена стандартному onViewCreated, но вместо корневого view передаются все (ViewBinding),
-        // а также ScopeProvider (для AutoDispose). Остальные методы служат для привязки к view model.
-        // Вызывается здесь (в `onViewStateRestored`) для согласованности с `lifecycle` - он делает так же.
+        // This is replacement for standart onViewCreated method but instead of root view passed all (ViewBinding)
+        // and ScopeProvider (for AutoDispose). Other methods serve for binding to view model.
+        // Called here in onViewStateRestored method for consistency with `lifecycle`
         onViewCreated(requireViews(), savedInstanceState, whenViewDestroyed)
         onApplyInitialModelValues(requireViews(), whenViewDestroyed)
         onBindToModel(requireViews(), whenViewDestroyed)
