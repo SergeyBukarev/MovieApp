@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         outState.putParcelable(ScopeBlueprintManager::class.java.name, scopeBlueprintManager)
     }
 
-
     private fun initRootScope() = KTP.openScope(RootScope::class.java) {
         it.installModules(
             SmoothieApplicationModule(application),
@@ -53,7 +52,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             NavControllerModule(RootNavigation::class),
             RootNavigationModule(it),
             ApiModule(),
-            MovieModule(),
         )
     }
 
@@ -63,6 +61,4 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         else
             savedInstanceState.getParcelable(ScopeBlueprintManager::class.java.name)!!
     }
-
-
 }
