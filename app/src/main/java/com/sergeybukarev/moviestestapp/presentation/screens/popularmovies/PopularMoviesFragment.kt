@@ -2,7 +2,6 @@ package com.sergeybukarev.moviestestapp.presentation.screens.popularmovies
 
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import autodispose2.ScopeProvider
 import autodispose2.androidx.lifecycle.autoDispose
@@ -10,6 +9,7 @@ import com.jakewharton.rxbinding4.view.visibility
 import com.sergeybukarev.moviestestapp.R
 import com.sergeybukarev.moviestestapp.core.platform.BaseFragment
 import com.sergeybukarev.moviestestapp.databinding.FragmentMoviePopularsBinding
+import com.sergeybukarev.moviestestapp.presentation.helpers.ShortScrollListener
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import org.deejdev.rxaction3.invoke
 import toothpick.ktp.delegate.inject
@@ -30,24 +30,22 @@ class PopularMoviesFragment : BaseFragment<FragmentMoviePopularsBinding>() {
         val spaceItemDecoration = SpacesItemDecoration(resources.getDimensionPixelOffset(R.dimen.videos_item_space))
         views.listView.layoutManager = layoutManager
         views.listView.addItemDecoration(spaceItemDecoration)
-        views.listView.addOnScrollListener(ShortScrollListener(layoutManager) { model.prefetchIfNeeded(it) })
         views.listView.adapter = adapter
     }
 
     override fun onBindToModel(views: FragmentMoviePopularsBinding, whenViewDestroyed: ScopeProvider) {
-        model.items.observeOn(AndroidSchedulers.mainThread()).autoDispose(this).subscribe { adapter.addItems(it) }
-        model.loadMoreAction.isExecuting.observeOn(AndroidSchedulers.mainThread()).autoDispose(this).subscribe(views.activityIndicatorView.visibility())
-        model.loadMoreAction.errors.observeOn(AndroidSchedulers.mainThread()).autoDispose(this).subscribe(::showError)
+        views.listView.addOnScrollListener(ShortScrollListener { lastVisiblePosition ->
+            val fetchThreshold = 5
+            if (lastVisiblePosition == RecyclerView.NO_POSITION || lastVisiblePosition + fetchThreshold >= adapter.itemCount) {
+                model.fetchNextPageAction()
+            }
+        })
+        model.items.observeOn(AndroidSchedulers.mainThread()).autoDispose(this).subscribe(adapter::updatePages)
+        model.fetchNextPageAction.isExecuting.observeOn(AndroidSchedulers.mainThread()).autoDispose(this).subscribe(views.activityIndicatorView.visibility())
+        model.fetchNextPageAction.errors.observeOn(AndroidSchedulers.mainThread()).autoDispose(this).subscribe(::showError)
     }
 
     override fun onViewBound(views: FragmentMoviePopularsBinding) {
-        model.loadMoreAction()
-    }
-}
-
-class ShortScrollListener(private val layoutManager: LinearLayoutManager, private val lastVisibleItemListener: (Int) -> Unit) : RecyclerView.OnScrollListener() {
-    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-        val lastVisible = layoutManager.findLastVisibleItemPosition()
-        lastVisibleItemListener.invoke(lastVisible)
+        model.fetchNextPageAction()
     }
 }

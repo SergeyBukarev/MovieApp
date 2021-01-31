@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sergeybukarev.domain.dto.ShortMovie
+import com.sergeybukarev.domain.dto.ShortMoviePage
 import com.sergeybukarev.moviestestapp.R
 import com.sergeybukarev.moviestestapp.databinding.ItemMovieBinding
 import com.sergeybukarev.moviestestapp.gateway.mappers.DateMapper
@@ -20,9 +21,9 @@ class PopularMoviesAdapter(
 
     override fun getItemCount() = items.size
 
-    fun addItems(newItems: List<ShortMovie>) {
+    fun updatePages(pages: List<ShortMoviePage>) {
         items.clear()
-        items.addAll(newItems)
+        items.addAll(pages.map { it.movies }.flatten())
         notifyDataSetChanged()
     }
 

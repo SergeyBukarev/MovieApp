@@ -10,7 +10,7 @@ import io.reactivex.rxjava3.core.Single
 import toothpick.InjectConstructor
 
 @InjectConstructor
-class FetchMovieDetailsInteractor(
+class MovieDetailsInteractor(
     @MovieId private val movieId: BoxedInt,
     private val movieGateway: MovieGateway,
 ) {
