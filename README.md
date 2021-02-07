@@ -17,6 +17,13 @@ This module contains:
 - Retrofit interfaces,
 - Interceptors
 
+### Domain module
+This is domain module with:
+- Business logic
+- Models
+- Gateway interfaces
+- Interactors
+
 ### App module
 This is main app module with:
 - Toothpick modules
@@ -65,5 +72,5 @@ For example, on the details screen, a child scope is opened that contains `@Movi
 ![](https://github.com/SergeyBukarev/MovieApp/blob/master/images/screen_2.png?raw=true)
 
 ### How to run this app
-To run this application, use this api key in `build.gradle` `c963063f038aefdac3efe5083ea6d962` and replace all `eights` to `sevens`. 
+To run this application, use this api key in `build.gradle` `c963063f038aefdac3efe5083ea6d962` and replace all `eights` to `sevens` in this api key . 
 
