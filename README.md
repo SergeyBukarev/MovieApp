@@ -51,7 +51,7 @@ This idea is taken from the iOS library `ReactiveCocoa`. This greatly simplifies
 
 Example:
 ```
-model.loadDetailsAction.**isExecuting**.observeOn(AndroidSchedulers.mainThread()).autoDispose(this).subscribe(views.activityIndicatorView.visibility())
+model.loadDetailsAction.isExecuting.observeOn(AndroidSchedulers.mainThread()).autoDispose(this).subscribe(views.activityIndicatorView.visibility())
 model.loadDetailsAction.errors.observeOn(AndroidSchedulers.mainThread()).autoDispose(this).subscribe(::showError)
 model.loadDetailsAction.values.observeOn(AndroidSchedulers.mainThread()).autoDispose(this).subscribe(::initViews)
 ```
