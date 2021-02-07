@@ -1,4 +1,4 @@
-# Overview
+## Overview
 This is a sample Android application that demonstrates an architectural design approach. 
 
 ## Modules
