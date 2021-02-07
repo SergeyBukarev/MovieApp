@@ -1,8 +1,6 @@
 # Overview
 This is a sample Android application that demonstrates an architectural design approach. 
 
-# Application design approach 
-
 ## Modules
 
 ### Common module
@@ -32,7 +30,7 @@ A diagram of the modules is presented below:
 ![](https://github.com/SergeyBukarev/MovieApp/blob/master/images/scheme_1.png?raw=true)
 
 
-##Features of this implementation:
+## Features of this implementation:
 
 ### RxAction
 This is a library that creates `Action` from any `Rx` `Observable`. `Action` contains additional Observables that helps you to bind to the ui. 
