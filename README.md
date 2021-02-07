@@ -1,15 +1,16 @@
 ## Overview
 This is a sample Android application that demonstrates an architectural design approach. 
 
-### Modules
+## Modules
+The application is split into the following modules. 
 
-#### Common module
+### Common module
 This module contains:
 - Class extensions
 - Helper classes
 - Some common dependencies
 
-#### ApiClient module
+### ApiClient module
 This module contains:
 - Data classes describing requests/responses 
 - Network services
