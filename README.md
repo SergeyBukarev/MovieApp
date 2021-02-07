@@ -67,6 +67,12 @@ val loadDetailsAction: Action<Unit, DetailedMovie> = Action.fromSingle(AndroidSc
 This library is needed to open child toothpick scopes whose life cycle is bonded to the fragments. When the fragment is opened, a child scope is opened, and when the user closes the fragment and it is permanently destroyed, then the scope is closed too.
 For example, on the details screen, a child scope is opened that contains `@MovieId`. `@MovieId` can be injected anywhere within this fragment scope. 
 
+## State saving 
+This app can handle screen rotation but can't handle process killing. For properly handling the death of a process you can use one of the methods below
+ - Android Architecture Components View Model
+ - Room + onSaveInstanceState method
+ - Or something else
+ 
 ## How it's looks like
 ![](https://github.com/SergeyBukarev/MovieApp/blob/master/images/screen_1.png?raw=true)
 ![](https://github.com/SergeyBukarev/MovieApp/blob/master/images/screen_2.png?raw=true)
