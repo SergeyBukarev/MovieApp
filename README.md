@@ -71,6 +71,6 @@ For example, on the details screen, a child scope is opened that contains `@Movi
 ![](https://github.com/SergeyBukarev/MovieApp/blob/master/images/screen_1.png?raw=true)
 ![](https://github.com/SergeyBukarev/MovieApp/blob/master/images/screen_2.png?raw=true)
 
-### How to run this app
-To run this application, use this api key in `build.gradle` `c963063f038aefdac3efe5083ea6d962` and replace all `eights` to `sevens` in this api key . 
+## How to run this app
+To run this application, use this api key in `build.gradle` `c963063f038aefdac3efe5083ea6d962` and replace all `eights` to `sevens` in this api key. 
 
